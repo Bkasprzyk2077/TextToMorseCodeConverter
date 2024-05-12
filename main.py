@@ -5,6 +5,8 @@ from wtforms.validators import DataRequired
 from flask_bootstrap import Bootstrap5
 import os
 
+import logic
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 Bootstrap5(app)
@@ -19,6 +21,9 @@ class TextForm(FlaskForm):
 def home():
     if request.method == "GET":
         return render_template("home.html", form=TextForm())
+    else:
+        text = logic.convert_to_morse(request.form.get("text"))
+        return render_template("home.html", text=text)
 
 
 if __name__ == '__main__':
