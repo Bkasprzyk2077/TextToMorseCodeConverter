@@ -7,6 +7,7 @@ data = {
     '6': '-....', '7': '--...', '8': '---..', '9': '----.'
 }
 
+
 def convert_to_morse(text: str):
     converted_data = ""
     for character in text:
@@ -14,5 +15,20 @@ def convert_to_morse(text: str):
             converted_data += data[character.upper()]
             converted_data += " "
         elif character == " ":
-            converted_data += " " * 4  # Cztery spacje odpowiadają jednej dłuższej spację w kodzie Morse'a
+            converted_data += " " * 4
+    return converted_data
+
+
+def convert_to_text(morse: str):
+    converted_data = ""
+    morse = morse.strip()
+    words = morse.split(" ")
+    print(words)
+    for word in words:
+        if word in data.values():
+            key_list = list(data.keys())
+            val_list = list(data.values())
+            position = val_list.index(word)
+            converted_data += key_list[position]
+    converted_data = converted_data.strip()
     return converted_data
