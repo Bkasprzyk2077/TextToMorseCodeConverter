@@ -9,6 +9,8 @@ data = {
 
 
 def convert_to_morse(text: str):
+    if text is None:
+        return ""
     converted_data = ""
     for character in text:
         if character.upper() in data.keys():
@@ -20,10 +22,11 @@ def convert_to_morse(text: str):
 
 
 def convert_to_text(morse: str):
+    if morse is None:
+        return ""
     converted_data = ""
     morse = morse.strip()
     words = morse.split(" ")
-    print(words)
     for word in words:
         if word in data.values():
             key_list = list(data.keys())
