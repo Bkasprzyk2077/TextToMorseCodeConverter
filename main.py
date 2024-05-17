@@ -19,7 +19,7 @@ class TextToMorse(FlaskForm):
 
 
 class MorseToText(FlaskForm):
-    morse = TextAreaField(label='Morse code', validators=[DataRequired()])
+    morse = TextAreaField(label='Morse code', validators=[DataRequired()], id="morse_code")
     form_id = HiddenField('form_id', default='form2')
     submit2 = SubmitField(label="Convert to text")
 
