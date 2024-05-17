@@ -31,20 +31,20 @@ class MorseToText(FlaskForm):
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "GET":
-        return render_template("index3.html", text_to_morse=TextToMorse(), morse_to_text=MorseToText())
+        return render_template("index.html", text_to_morse=TextToMorse(), morse_to_text=MorseToText())
     else:
         if request.form.get('form_id') == "form1":
             morse = logic.convert_to_morse(request.form.get("text"))
             morse_to_text_form = MorseToText()
             morse_to_text_form.morse.data = morse
             morse_to_text_form.form_id.data = "form2"
-            return render_template("index3.html", text_to_morse=TextToMorse(), morse_to_text=morse_to_text_form)
+            return render_template("index.html", text_to_morse=TextToMorse(), morse_to_text=morse_to_text_form)
         elif request.form.get('form_id') == "form2":
             text = logic.convert_to_text(request.form.get("morse"))
             text_to_morse_form = TextToMorse()
             text_to_morse_form.text.data = text
             text_to_morse_form.form_id.data = "form1"
-            return render_template("index3.html", text_to_morse=text_to_morse_form, morse_to_text=MorseToText())
+            return render_template("index.html", text_to_morse=text_to_morse_form, morse_to_text=MorseToText())
 
 
 @app.route("/text_to_morse", methods=["GET"])

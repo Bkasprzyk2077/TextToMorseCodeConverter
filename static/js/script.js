@@ -45,3 +45,15 @@ function copyMorseToClipboard() {
     document.execCommand("copy"); // Skopiuj zaznaczony tekst do schowka
     alert("Morse code copied to clipboard!");
 }
+
+
+function switch_mode() {
+    var checkbox = document.getElementById("flexSwitchCheckDefault");
+    var htmlElement = document.documentElement;
+    if (checkbox.checked) {
+        htmlElement.setAttribute("data-bs-theme", "dark");
+    } else {
+        htmlElement.setAttribute("data-bs-theme", "light");
+        console.log("Checkbox nie jest zaznaczony");
+    }
+}
