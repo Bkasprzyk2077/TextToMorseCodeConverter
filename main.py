@@ -29,7 +29,6 @@ def home():
     if request.method == "GET":
         return render_template("index3.html", text_to_morse=TextToMorse(), morse_to_text=MorseToText())
     else:
-        print(request.form.get('form_id'))
         if request.form.get('form_id') == "form1":
             morse = logic.convert_to_morse(request.form.get("text"))
             morse_to_text_form = MorseToText()

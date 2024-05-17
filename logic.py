@@ -1,37 +1,44 @@
 data = {
-    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.',
-    'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.',
-    'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-',
-    'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
-    '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
-    '6': '-....', '7': '--...', '8': '---..', '9': '----.'
+    'A': '· -', 'B': '- · · ·', 'C': '- · - ·', 'D': '- · ·', 'E': '·', 'F': '· · - ·',
+    'G': '- - ·', 'H': '· · · ·', 'I': '· ·', 'J': '· - - -', 'K': '- · -', 'L': '· - · ·',
+    'M': '- -', 'N': '- ·', 'O': '- - -', 'P': '· - - ·', 'Q': '- - · -', 'R': '· - ·',
+    'S': '· · ·', 'T': '-', 'U': '· · -', 'V': '· · · -', 'W': '· - -', 'X': '- · · -',
+    'Y': '- · - -', 'Z': '- - · ·', '1': '· - - - -', '2': '· · - - -', '3': '· · · - -',
+    '4': '· · · · -', '5': '· · · · ·', '6': '- · · · ·', '7': '- - · · ·', '8': '- - - · ·',
+    '9': '- - - - ·', '0': '- - - - -', ', ': '- - · · - -', '.': '· - · - · -', '?': '· · - - · ·',
+    '/': '- · · - ·', '-': '- · · · · -', '(': '- · - - ·', ')': '- · - - · -'
 }
 
 
 def convert_to_morse(text: str):
     if text is None:
         return ""
-    converted_data = ""
+    morse_code = ""
     for character in text:
         if character.upper() in data.keys():
-            converted_data += data[character.upper()]
-            converted_data += " "
+            morse_code += data[character.upper()]
+            morse_code += " " * 3
         elif character == " ":
-            converted_data += " " * 4
-    return converted_data
+            morse_code += " " * 7
+    morse_code = morse_code.strip()
+    return morse_code
 
 
 def convert_to_text(morse: str):
     if morse is None:
         return ""
-    converted_data = ""
+    text = ""
     morse = morse.strip()
-    words = morse.split(" ")
+    words = morse.split(" " * 7)
+    print(words)
     for word in words:
-        if word in data.values():
-            key_list = list(data.keys())
-            val_list = list(data.values())
-            position = val_list.index(word)
-            converted_data += key_list[position]
-    converted_data = converted_data.strip()
-    return converted_data
+        characters = word.split(" " * 3)
+        for character in characters:
+            if character in data.values():
+                key_list = list(data.keys())
+                val_list = list(data.values())
+                position = val_list.index(character)
+                text += key_list[position].lower()
+        text += " "
+    text = text.strip()
+    return text
