@@ -13,15 +13,19 @@ Bootstrap5(app)
 
 
 class TextToMorse(FlaskForm):
-    text = TextAreaField(label='Plain text', validators=[DataRequired()])
+    text = TextAreaField(label='Plain text', validators=[DataRequired()], id="plain_text")
     form_id = HiddenField('form_id', default='form1')
     submit1 = SubmitField(label="Convert to morse")
+    copy_text = SubmitField('Copy',
+                       render_kw={'onclick': 'copyTextToClipboard()', 'type': 'button', 'class': 'btn btn-dark'})
 
 
 class MorseToText(FlaskForm):
     morse = TextAreaField(label='Morse code', validators=[DataRequired()], id="morse_code")
     form_id = HiddenField('form_id', default='form2')
     submit2 = SubmitField(label="Convert to text")
+    copy_morse = SubmitField('Copy', render_kw={'onclick': 'copyMorseToClipboard()', 'type': 'button', 'class': 'btn btn-dark'})
+    play_sound = SubmitField('Play', render_kw={'onclick': 'readMorse()', 'type': 'button', 'class': 'btn btn-success'})
 
 
 @app.route("/", methods=["GET", "POST"])
